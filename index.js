@@ -1,11 +1,11 @@
 const dotenv = require("dotenv");
 const connectDB = require("./src/config/db.config.js");
 const app = require("./src/app.js");
-const { errorHandler } = require("./src/middleware/errorHandler.middelware.js");
+// const { errorHandler } = require("./src/middleware/errorHandler.middelware.js");
 
 dotenv.config({ path: "./.env" });
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 const startServer = async () => {
   try {

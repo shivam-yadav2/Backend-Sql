@@ -1,11 +1,13 @@
-const asyncHandler = require('../utils/asyncHandler.utils.js')
+const {asyncHandler} = require('../utils/asyncHandler.utils.js')
 const jwt = require('jsonwebtoken')
 const express = require("express");
-const ApiResponse = require('../utils/ApiResponse.utils.js')
-const ApiError = require('../utils/ApiError.utils.js')
+const {ApiResponse} = require('../utils/ApiResponse.utils.js')
+const {ApiError} = require('../utils/ApiError.utils.js')
 const app = express()
+const bcrypt = require('bcrypt')
 
 const register = asyncHandler(async (req , res)=>{
+    console.log("Body",req)
     const {name , email,password , role_id} = req.body;
     try {
         const hashPassword = await bcrypt.hash(password, 10)
@@ -22,3 +24,7 @@ const register = asyncHandler(async (req , res)=>{
         throw new ApiError(409, error,"Admin Already Exists");
     }
 })
+
+module.exports = {
+    register
+}

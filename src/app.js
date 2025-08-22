@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const helmet = require("helmet");
-const xss = require("xss-clean");
+// const xss = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 
 const app = express();
@@ -13,8 +13,8 @@ const corsOptions = {
   };
   app.use(cors(corsOptions));
   app.use(helmet());
-  app.use(xss());
-  app.use(express.json({ limit: "16kb" }));
+//   app.use(xss());
+  app.use(express.json());
   app.use(express.urlencoded({ extended: true, limit: "16kb" }));
   app.use(express.static("public"));
   
@@ -27,15 +27,11 @@ const corsOptions = {
   app.use(limiter);
 
 // Routes
-// const authRoutes = require("./routes/auth");
-// const roleRoutes = require("./routes/role");
-// const taskRoutes = require("./routes/task");
-// const notificationRoutes = require("./routes/notification");
+const authRoutes = require("./routes/auth.routes.js");
 
-// app.use("/api/auth", authRoutes);
-// app.use("/api/roles", roleRoutes);
-// app.use("/api/tasks", taskRoutes);
-// app.use("/api/notifications", notificationRoutes);
+
+app.use("/api/auth", authRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
