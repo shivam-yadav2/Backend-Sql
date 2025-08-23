@@ -29,10 +29,14 @@ const corsOptions = {
 // Routes
 const authRoutes = require("./routes/auth.routes.js");
 const roleRoutes = require("./routes/role.routes.js");
+const permissionRoutes = require("./routes/permission.routes.js");
+const rolePermissionRoutes = require("./routes/rolePermission.routes.js");
 
 
 app.use("/api/auth", authRoutes);
 app.use("/api/roles", roleRoutes);
+app.use("/api/permission", permissionRoutes);
+app.use("/api/rolePermission", rolePermissionRoutes);
 
 
 const PORT = process.env.PORT || 5000;
